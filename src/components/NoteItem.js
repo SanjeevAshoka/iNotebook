@@ -13,7 +13,7 @@ export default function NoteItem(props) {
               <div style={{display:'flex'}}>
                   <h5 className="card-title">{props.item.title }</h5>
                   <div style={{ marginLeft:'120px', cursor: 'pointer'}} ><FaCalendar onClick={()=>deleteNote(props.item._id)}/></div> 
-                  <div style={{ marginLeft:'30px', cursor: 'pointer'}}><FiEdit onClick={()=>editNote(props.item._id)}/></div>
+                  <div style={{ marginLeft:'30px', cursor: 'pointer'}}><FiEdit onClick={()=>props.updateNote(props.item)}/></div>
                 </div>
                   <p className="card-text">{props.item.description }</p>
                  
