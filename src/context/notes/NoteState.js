@@ -31,21 +31,13 @@ const NoteState = (props) =>{
         },
         body: JSON.stringify({title, description, tag})
       });
-      const json =  response.json();
-      console.log("Adding data ")
-      let noteData = {
-        "_id": "6",
-      "user": "62ccf79c636fe2deda8dc796",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2022-07-18T14:27:01.715Z",
-      "__v": 0
-      }
+      const json = await response.json();
+      let noteData = json
       setNotes(note.concat(noteData));
     }
     // Delete a Note
    const deleteNote = async (id)=>{
+    console.log("id=",id);
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: 'DELETE',
       headers: {
@@ -53,12 +45,11 @@ const NoteState = (props) =>{
         'auth-tocken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjY2Y3OWM2MzZmZTJkZWRhOGRjNzk2In0sImlhdCI6MTY1NzY4NzY3N30.ZMCtrIfsHEyZWKbdsgaLe9EUQsg0VlyFYuMGciH3fZ8'
       },
     });
-    const json = await  response.json();
+    // const json = await  response.json();
       getAllNote();
     }
     // Edit a Note
     const editNote =async (id, title, description, tag)=>{
-      console.log("editNote",id);
       const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
         method: 'PUT',
         headers: {
@@ -67,8 +58,8 @@ const NoteState = (props) =>{
         },
         body: JSON.stringify({title, description, tag})
       });
-      const json =await  response.json();
-      console.log("json= ",json);
+      // const json =await  response.json();
+      // console.log("json= ",json);
       //getAllNote();                 //We can call the backend to again fetch all notes from DB. or we can directly update in frontend
 
       // update in frontend
@@ -81,8 +72,8 @@ const NoteState = (props) =>{
           newNotes[index].tag= tag;
           break;
         }
-        setNotes(newNotes);
       }
+      setNotes(newNotes);
     }
   
     return (

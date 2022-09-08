@@ -47,11 +47,11 @@ export default function Notes() {
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
-                                    <input type="text" value = {enote.title} className="form-control" id="title" name="title" aria-describedby="emailHelp" onChange={onChange} />
+                                    <input type="text" value = {enote.title} className="form-control" id="title" name="title" aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
-                                    <input type="text" value = {enote.description}  className="form-control" id="description" name="description" onChange={onChange} />
+                                    <input type="text" value = {enote.description}  className="form-control" id="description" name="description" onChange={onChange} minLength={8} required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="tag" className="form-label">Tag</label>
@@ -68,9 +68,12 @@ export default function Notes() {
             </div>
             <div className="row my-3">
                 <h2>Your Notes</h2>
-                {note.map((item) => {
+                {note.length === 0 ? <div style={{marginLeft:8}}>No Note to Display...</div>: 
+                note.map((item) => {
                     return <NoteItem item={item} key={item._id} addNote={addNote} updateNote={updateNote} />
-                })}
+                })
+                }
+                
             </div>
         </>
     )

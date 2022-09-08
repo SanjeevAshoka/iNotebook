@@ -5,7 +5,8 @@ import noteContext from '../context/notes/noteContext';
 
 export default function NoteItem(props) {
      const contextForDel = useContext(noteContext);
-     const { deleteNote , editNote} = contextForDel;
+     const { deleteNote } = contextForDel;
+    
   return (
     <div className='col-md-3 my-3'>
         <div className="card" >
