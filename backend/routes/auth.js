@@ -35,15 +35,15 @@ router.post('/createuser', [
        })
        const data = { user: { id: user.id}}
        const jwttocken = jwt.sign(data, JWT_secret);
-       res.json({jwttocken})
-       res.json({message: "The user has been created"});
+      //  res.json({jwttocken})
+       res.json({jwttocken:jwttocken, Success: true, message: "The user has been created"});
        // .then(user => res.json(user))
        // .catch((err)=> {console.log(err); res.send('email should be unique')});
      // res.send(req.body);
     }
     catch(error){
       console.log("Error: ",error);
-      res.status(500).send("Some Error Occured");
+      res.status(500).json({Success: false, message:"Some Error Occured"});
     }
 
 });
@@ -68,12 +68,13 @@ router.post('/login', [
         }
         const data = { user: { id: user.id}}
         const jwttocken = jwt.sign(data, JWT_secret);
-        res.json({jwttocken})
+       let Success= true;
+        res.json({Success,jwttocken})
 
     }
     catch(error){
       console.log("Error: ",error);
-      res.status(500).send("Internal server Error Occured");
+      res.status(500).json({Success:false,error:"Internal server Error Occured"});
     }
   });
 
